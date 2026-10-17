@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>من نحن والأسئلة الشائعة | لقاء</title>
+<meta name="description" content="تعرّف على تطبيق «لقاء» لتنظيم الجلسات الأسرية والتربوية، وأجوبة أكثر الأسئلة شيوعاً حول الاستخدام والتثبيت والخصوصية.">
+<meta name="theme-color" content="#0d7a5f">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="لقاء">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="logo" href="index.html" aria-label="لقاء — الصفحة الرئيسية">
+      <span class="logo-mark">🤝</span>
+      <span>لقاء<small>جلسات أسرية وتربوية منظمة</small></span>
+    </a>
+    <nav class="nav-links no-print" aria-label="التنقل الرئيسي">
+      <a href="index.html">🏠 الرئيسية</a>
+      <a href="about.html" aria-current="page">؟ من نحن</a>
+    </nav>
+    <div class="spacer"></div>
+    <button id="installBtn" class="icon-btn no-print" onclick="installApp()" hidden>📲 تثبيت التطبيق</button>
+    <div class="font-group no-print" title="حجم الخط">
+      <button onclick="changeFont(-1)" aria-label="تصغير الخط">أ−</button>
+      <button onclick="resetFont()" aria-label="خط افتراضي">أ</button>
+      <button onclick="changeFont(1)" aria-label="تكبير الخط">أ+</button>
+    </div>
+    <button id="themeBtn" class="icon-btn" onclick="toggleTheme()" aria-label="الوضع الليلي">🌙 ليلي</button>
+  </div>
+</header>
+
+<div class="container">
+
+  <section class="page-hero">
+    <h1>؟ من نحن</h1>
+    <p>«لقاء» تطبيق عربي بسيط هدفه مساعدة الأسرة والمربّين على إدارة جلساتهم واجتماعاتهم باحترافية: محاور واضحة، قرارات موثّقة، وقت مُنظَّم، ومحضر جاهز للمشاركة — كل ذلك دون تعقيد ودون حاجة لحساب أو إنترنت بعد أول تحميل.</p>
+  </section>
+
+  <!-- من نحن -->
+  <section class="card">
+    <h2>🎯 رسالتنا</h2>
+    <p class="sub">لماذا أنشأنا «لقاء»؟</p>
+    <p>كثير من اللقاءات العائلية والتربوية تُبدع فيها الأفكار ثم تُنسى؛ لأنها لا تُوثَّق. جاء «لقاء» ليكون أداة خفيفة وسهلة الاستخدام تحوّل الجلسة من حديث عابر إلى <b>خطة عمل واضحة</b> لها محاور ومسؤولون وقرارات ومتابعة.</p>
+    <p>التطبيق يعمل مباشرة من المتصفح، ويمكن تثبيته على الجوال كتطبيق مستقل، ويحفظ بياناتك على جهازك فقط.</p>
+    <div class="feature-grid">
+      <div class="feature"><div class="ico">🗂️</div><h3>تنظيم المحاور</h3><p>أضف بنود النقاش مع الوقت المتوقع والمسؤول عن كل محور.</p></div>
+      <div class="feature"><div class="ico">✅</div><h3>توثيق القرارات</h3><p>سجّل القرار المتخذ ومسؤول المتابعة، وتابع الإنجاز بنقرة.</p></div>
+      <div class="feature"><div class="ico">⏳</div><h3>إدارة الوقت</h3><p>مؤقت تنازلي مع تنبيه صوتي يحافظ على تركيز الجلسة.</p></div>
+      <div class="feature"><div class="ico">⚡</div><h3>محضر بنقرة</h3><p>ملخص جاهز للمشاركة واتساب أو الطباعة أو الحفظ كصورة و PDF.</p></div>
+      <div class="feature"><div class="ico">🌙</div><h3>راحة للعين</h3><p>وضع ليلي، وتحكّم بحجم الخط، وتاريخ هجري وميلادي.</p></div>
+      <div class="feature"><div class="ico">🔒</div><h3>خصوصية كاملة</h3><p>لا حسابات ولا سيرفرات؛ بياناتك تبقى على جهازك.</p></div>
+    </div>
+  </section>
+
+  <!-- الأسئلة الشائعة -->
+  <section class="card" id="faq" style="margin-top:18px;scroll-margin-top:80px">
+    <h2>❓ الأسئلة الشائعة</h2>
+    <p class="sub">أجوبة سريعة لأكثر ما يُسأل عنه.</p>
+    <div class="faq">
+      <details open>
+        <summary>كيف أثبّت التطبيق على جوالي؟</summary>
+        <div class="ans">افتح الموقع ثم اضغط زر <b>«📲 تثبيت التطبيق»</b> في الأعلى إن ظهر، أو من قائمة المتصفح اختر <b>«إضافة إلى الشاشة الرئيسية»</b>. على أندرويد استخدم Chrome، وعلى آيفون استخدم Safari ثم زر المشاركة ← «إضافة إلى الشاشة الرئيسية».</div>
+      </details>
+      <details>
+        <summary>هل يحتاج التطبيق إنترنت؟</summary>
+        <div class="ans">لا، بعد أول زيارة يُخزّن التطبيق ملفاته على جهازك ويعمل دون إنترنت. الإنترنت مطلوب فقط للتحويل الهجري (تقويم أم القرى) ومشاركة الواتساب.</div>
+      </details>
+      <details>
+        <summary>أين تُحفظ بياناتي؟ وهل هي آمنة؟</summary>
+        <div class="ans">تُحفظ كل البيانات <b>محلياً على جهازك</b> في مساحة المتصفح (localStorage)، ولا تُرسل إلى أي سيرفر. لذلك لا تفقدها عند إغلاق الصفحة، لكن احتفظ بنسخة عبر «حفظ صورة» أو «حفظ PDF» إذا أردت الاحتفاظ الدائم.</div>
+      </details>
+      <details>
+        <summary>لماذا تظهر بياناتي في جهاز آخر؟</summary>
+        <div class="ans">لا تظهر — البيانات مرتبطة بالمتصفح والجهاز فقط. للنقل، استخدم خيار «نسخ النص» أو «حفظ صورة/PDF» ثم أعد إدخالها.</div>
+      </details>
+      <details>
+        <summary>كيف أحوّل التاريخ الميلادي إلى هجري؟</summary>
+        <div class="ans">أدخل التاريخ الميلادي في حقل «التاريخ الميلادي» ثم اضغط الزر <b>«🔄 تحويل تلقائي من الميلادي»</b>. يمكنك أيضاً كتابة التاريخ الهجري يدوياً.</div>
+      </details>
+      <details>
+        <summary>هل يمكنني تغيير ترتيب المحاور أو المعلومات؟</summary>
+        <div class="ans">تعديل القيم داخل الجدول متاح مباشرة. لإعادة الترتيب حالياً يمكنك حذف المحور وإضافته في المكان المطلوب. رتّب المحاور حسب أولوية النقاش.</div>
+      </details>
+      <details>
+        <summary>كيف أشارك المحضر مع العائلة؟</summary>
+        <div class="ans">من قسم «ملخص المحضر» اختر <b>💬 مشاركة واتساب</b> أو <b>📋 نسخ النص</b>، أو احفظه كـ <b>🖼️ صورة</b> / <b>📄 PDF</b> ثم أرسله في أي تطبيق.</div>
+      </details>
+      <details>
+        <summary>هل التطبيق مجاني؟</summary>
+        <div class="ans">نعم، «لقاء» مجاني ومفتوح للاستخدام العائلي والتربوي. نسعد دائماً باقتراحاتكم لتطويره.</div>
+      </details>
+    </div>
+  </section>
+
+  <!-- تواصل -->
+  <section class="card" style="margin-top:18px">
+    <h2>💬 هل لديك سؤال أو اقتراح؟</h2>
+    <p class="sub">رأيك يساعدنا على تحسين «لقاء».</p>
+    <div class="contact-row">
+      <a class="btn btn-whats" href="https://wa.me/?text=%D8%A7%D9%82%D8%AA%D8%B1%D8%A7%D8%AD%20%D9%84%D8%AA%D8%B7%D9%88%D9%8A%D8%B1%20%D8%AA%D8%B7%D8%A8%D9%8A%D9%82%20%C2%AB%D9%84%D9%82%D8%A7%D8%A1%C2%BB" target="_blank" rel="noopener">💬 أرسل اقتراحك واتساب</a>
+      <a class="btn btn-primary" href="index.html">🚀 ابدأ الاستخدام الآن</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot-links no-print">
+      <a href="index.html">🏠 الرئيسية</a>
+      <a href="about.html">؟ من نحن</a>
+      <a href="about.html#faq">❓ الأسئلة الشائعة</a>
+    </div>
+    صُنع بحب لتنظيم لقاءات العائلة 🤍 — «لقاء» يعمل دون إنترنت بعد أول تحميل.
+  </footer>
+</div>
+
+<div id="toast"></div>
+
+<script src="pwa.js"></script>
+</body>
+</html>
