@@ -2,37 +2,191 @@
 <html lang="ar" dir="rtl" data-theme="light">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0d7a5f">
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="icon.svg" type="image/svg+xml">
-<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
-<link rel="icon" href="icon-192.png" sizes="192x192" type="image/png">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="لقاء">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>لقاء | تنظيم وإدارة الجلسات الأسرية والتربوية</title>
 <meta name="description" content="لقاء — منصة عربية لتنظيم وإدارة الجلسات والاجتماعات الأسرية والتربوية: محاور، قرارات، مؤقت، ومحضر جاهز للمشاركة.">
-<link rel="stylesheet" href="styles.css">
+<style>
+:root{
+  --bg:#f6f8f7; --card:#ffffff; --ink:#1a2b26; --muted:#6b7d76;
+  --brand:#0d7a5f; --brand-2:#0aa27a; --brand-soft:#e2f4ec;
+  --accent:#e9a23b; --accent-soft:#fdf1da;
+  --line:#e5edea; --danger:#d64545; --ok:#1a9e6b;
+  --shadow:0 10px 30px rgba(13,122,95,.10);
+  --radius:18px; --fs:16px;
+}
+[data-theme="dark"]{
+  --bg:#0d1513; --card:#15211d; --ink:#eef5f1; --muted:#9db3aa;
+  --brand:#2dd4a0; --brand-2:#34e0ab; --brand-soft:#14332a;
+  --accent:#f2b64f; --accent-soft:#3a2d12;
+  --line:#243733; --shadow:0 10px 30px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box}
+html{font-size:var(--fs);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Tajawal","Segoe UI",Tahoma,Arial,sans-serif;line-height:1.8;
+  transition:background .3s,color .3s}
+a{color:inherit}
+.container{max-width:1080px;margin:auto;padding:0 16px 80px}
+/* Topbar */
+.topbar{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);
+  background:color-mix(in srgb, var(--bg) 86%, transparent);
+  border-bottom:1px solid var(--line)}
+.topbar-inner{max-width:1080px;margin:auto;padding:12px 16px;display:flex;align-items:center;gap:12px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:1.35rem}
+.logo-mark{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff;font-size:1.4rem;box-shadow:var(--shadow)}
+.logo small{display:block;font-size:.72rem;color:var(--muted);font-weight:600;line-height:1.2}
+.spacer{flex:1}
+.icon-btn{border:1px solid var(--line);background:var(--card);color:var(--ink);
+  border-radius:12px;padding:8px 12px;cursor:pointer;font-family:inherit;font-weight:700;
+  display:inline-flex;align-items:center;gap:6px;transition:.2s}
+.icon-btn:hover{transform:translateY(-1px);border-color:var(--brand)}
+.icon-btn.active{background:var(--brand);color:#fff;border-color:var(--brand)}
+.font-group{display:flex;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--card)}
+.font-group button{border:0;background:transparent;color:var(--ink);padding:8px 12px;cursor:pointer;font-family:inherit;font-weight:900}
+.font-group button:hover{background:var(--brand-soft)}
+/* Hero */
+.hero{margin:22px 0;background:linear-gradient(135deg,#0d7a5f,#0aa27a 55%,#0cc98f);
+  color:#fff;border-radius:24px;padding:32px 24px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+[data-theme="dark"] .hero{background:linear-gradient(135deg,#0e3b30,#155843)}
+.hero::after{content:"✦";position:absolute;font-size:180px;opacity:.12;left:10px;top:-40px;transform:rotate(15deg)}
+.hero h1{margin:0 0 6px;font-size:clamp(1.6rem,4.5vw,2.5rem);line-height:1.3}
+.hero p{margin:0;opacity:.92;max-width:640px}
+.hero-badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.badge{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);
+  padding:6px 14px;border-radius:999px;font-size:.85rem;font-weight:700}
+/* Cards */
+.grid{display:grid;gap:18px;margin-top:18px}
+@media(min-width:900px){.grid-2{grid-template-columns:1fr 380px}.grid-2r{grid-template-columns:380px 1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:20px;box-shadow:var(--shadow)}
+.card h2{margin:0 0 4px;font-size:1.2rem;display:flex;align-items:center;gap:8px}
+.card .sub{color:var(--muted);font-size:.9rem;margin:0 0 16px}
+label.lbl{display:block;font-weight:800;font-size:.9rem;margin:14px 0 6px}
+input[type=text],input[type=date],input[type=time],input[type=number],select,textarea{
+  width:100%;border:1.5px solid var(--line);border-radius:12px;padding:11px 13px;
+  font-family:inherit;font-size:1rem;background:var(--bg);color:var(--ink);transition:.2s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 4px color-mix(in srgb,var(--brand) 15%, transparent)}
+.row2{display:grid;gap:12px}@media(min-width:640px){.row2{grid-template-columns:1fr 1fr}.row3{grid-template-columns:1fr 1fr 1fr}}
+.row3{display:grid;gap:12px}
+/* attendees */
+.chip-input{display:flex;gap:8px}
+.chip-input button{flex-shrink:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{background:var(--brand-soft);color:var(--ink);border:1px solid color-mix(in srgb,var(--brand) 30%, transparent);
+  padding:5px 8px 5px 12px;border-radius:999px;font-size:.88rem;font-weight:700;display:inline-flex;align-items:center;gap:8px}
+.chip button{border:0;background:var(--brand);color:#fff;width:22px;height:22px;border-radius:50%;cursor:pointer;line-height:1}
+.btn{border:0;border-radius:12px;padding:11px 18px;font-family:inherit;font-weight:800;cursor:pointer;
+  font-size:.95rem;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:.2s}
+.btn-primary{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff;box-shadow:0 6px 18px rgba(13,122,95,.3)}
+.btn-primary:hover{transform:translateY(-1px)}
+.btn-ghost{background:var(--brand-soft);color:var(--ink)}
+.btn-line{background:transparent;border:1.5px solid var(--line);color:var(--ink)}
+.btn-whats{background:#1faa55;color:#fff}
+.btn-amber{background:var(--accent);color:#2a1e05}
+.btn-danger{background:#fdecec;color:var(--danger);border:1px solid #f5c6c6}
+.btn-sm{padding:7px 12px;font-size:.85rem;border-radius:10px}
+.btn-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+/* Timer */
+.timer-wrap{text-align:center}
+.timer-ring{position:relative;width:220px;height:220px;margin:8px auto}
+.timer-ring svg{transform:rotate(-90deg)}
+.ring-bg{stroke:var(--line)}.ring-fg{stroke:url(#grad);stroke-linecap:round;transition:stroke-dashoffset .5s linear}
+.timer-num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.timer-num strong{font-size:2.6rem;font-variant-numeric:tabular-nums;line-height:1}
+.timer-num span{color:var(--muted);font-size:.85rem}
+.timer-num.done strong{color:var(--danger);animation:pulse 1s infinite}
+@keyframes pulse{50%{transform:scale(1.06)}}
+.presets{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:12px 0}
+.preset{border:1.5px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;
+  padding:6px 14px;cursor:pointer;font-family:inherit;font-weight:800;font-size:.85rem}
+.preset:hover,.preset.on{border-color:var(--brand);background:var(--brand-soft)}
+.timer-ctrl{display:flex;gap:10px;justify-content:center;margin-top:10px;flex-wrap:wrap}
+.timer-ctrl .btn{min-width:110px}
+/* Table */
+.table-tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
+.stats{display:flex;gap:10px;flex-wrap:wrap}
+.stat{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:6px 14px;font-size:.85rem;font-weight:800}
+.stat b{color:var(--brand)}
+.table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:14px}
+table{width:100%;border-collapse:collapse;min-width:920px;background:var(--card)}
+thead th{background:var(--brand-soft);padding:12px 10px;font-size:.88rem;white-space:nowrap}
+tbody td{padding:8px;border-top:1px solid var(--line);vertical-align:middle}
+tbody td input,tbody td select{padding:8px 10px;font-size:.9rem}
+tr.done-row{background:color-mix(in srgb,var(--ok) 8%, transparent)}
+tr.done-row .topic-cell{text-decoration:line-through;opacity:.7}
+.del-btn{border:0;background:#fdecec;color:var(--danger);border-radius:10px;padding:8px 10px;cursor:pointer;font-weight:900}
+.empty{padding:26px;text-align:center;color:var(--muted)}
+/* Summary */
+#summaryText{min-height:220px;line-height:2;font-size:.98rem;white-space:pre-wrap}
+.hint{background:var(--accent-soft);border:1px dashed var(--accent);border-radius:12px;padding:10px 14px;font-size:.88rem;margin-top:12px}
+.hijri-line{display:flex;gap:8px;margin-top:8px;align-items:center;flex-wrap:wrap}
+.hijri-auto{font-size:.82rem;font-weight:800;color:var(--brand);background:var(--brand-soft);
+  border:1px solid color-mix(in srgb,var(--brand) 30%, transparent);border-radius:999px;padding:5px 14px;cursor:pointer;font-family:inherit}
+.hijri-auto:hover{filter:brightness(.96)}
+.hijri-show{font-size:.85rem;color:var(--muted);font-weight:700}
+.seg{display:flex;border:1.5px solid var(--line);border-radius:12px;overflow:hidden}
+.seg button{flex:1;border:0;background:var(--bg);color:var(--muted);padding:10px 6px;cursor:pointer;font-family:inherit;font-weight:800;font-size:.85rem}
+.seg button.on{background:var(--brand);color:#fff}
+.quote-box{border-right:4px solid var(--accent);background:var(--accent-soft);border-radius:12px;padding:12px 14px;margin-top:8px}
+#quote{min-height:70px}
+#notes{min-height:70px}
+/* Toast */
+#toast{position:fixed;bottom:22px;right:50%;transform:translateX(50%) translateY(80px);opacity:0;
+  background:#10201b;color:#fff;padding:12px 22px;border-radius:999px;font-weight:800;z-index:99;transition:.3s;box-shadow:0 10px 30px rgba(0,0,0,.3)}
+#toast.show{transform:translateX(50%) translateY(0);opacity:1}
+/* Footer */
+footer{text-align:center;color:var(--muted);font-size:.85rem;margin-top:26px}
+/* Steps */
+.steps{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.step{flex:1;min-width:140px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:14px;padding:10px 12px;font-size:.85rem}
+/* Modals (auth & sessions) */
+.modal-overlay{position:fixed;inset:0;background:rgba(10,20,17,.55);z-index:80;display:none;align-items:center;justify-content:center;padding:16px}
+.modal-card{background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);
+  width:100%;max-width:440px;padding:22px;position:relative;max-height:90vh;overflow-y:auto}
+.modal-x{position:absolute;top:14px;left:14px;border:0;background:var(--bg);color:var(--muted);width:34px;height:34px;border-radius:50%;cursor:pointer;font-weight:900}
+.modal-x:hover{color:var(--danger)}
+.seg{display:flex;border:1.5px solid var(--line);border-radius:12px;overflow:hidden}
+.seg button{flex:1;border:0;background:var(--bg);color:var(--muted);padding:10px;cursor:pointer;font-family:inherit;font-weight:800;font-size:.9rem}
+.seg button.on{background:var(--brand);color:#fff}
+.auth-msg{margin-top:10px;font-size:.88rem;font-weight:700;color:var(--danger);min-height:1em}
+.lib-item{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin-bottom:8px;background:var(--bg)}
+.li-info{flex:1;min-width:0}
+.li-info b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.li-info span{color:var(--muted);font-size:.8rem}
+.li-actions{display:flex;gap:6px;flex-shrink:0}
+.user-chip{max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;border:1px solid var(--line);
+  background:var(--brand-soft);color:var(--ink);border-radius:999px;padding:8px 14px;font-size:.85rem;font-weight:800}
+/* Print */
+#printArea{display:none}
+@media print{
+  .topbar,.hero,.no-print,footer,#toast{display:none!important}
+  body{background:#fff;color:#000}
+  .container{max-width:none;padding:0}
+  .card{box-shadow:none;border:0;padding:0}
+  #printArea{display:block!important;font-family:inherit}
+  #printArea h1{font-size:22px;margin-bottom:4px}
+  #printArea table{width:100%;border-collapse:collapse;min-width:0}
+  #printArea th,#printArea td{border:1px solid #000;padding:6px;font-size:13px}
+}
+</style>
 </head>
 <body>
 
 <header class="topbar">
   <div class="topbar-inner">
-    <a class="logo" href="index.html" aria-label="لقاء — الصفحة الرئيسية"><span class="logo-mark">🤝</span><span>لقاء<small>جلسات أسرية وتربوية منظمة</small></span></a>
-    <nav class="nav-links no-print" aria-label="التنقل الرئيسي">
-      <a href="index.html" aria-current="page">🏠 الرئيسية</a>
-      <a href="about.html">؟ من نحن</a>
-    </nav>
+    <div class="logo"><span class="logo-mark">🤝</span><span>لقاء<small>جلسات أسرية وتربوية منظمة</small></span></div>
     <div class="spacer"></div>
-    <button id="installBtn" class="icon-btn no-print" onclick="installApp()" hidden>📲 تثبيت التطبيق</button>
     <div class="font-group no-print" title="حجم الخط">
       <button onclick="changeFont(-1)" aria-label="تصغير الخط">أ−</button>
       <button onclick="resetFont()" aria-label="خط افتراضي">أ</button>
       <button onclick="changeFont(1)" aria-label="تكبير الخط">أ+</button>
     </div>
     <button id="themeBtn" class="icon-btn" onclick="toggleTheme()" aria-label="الوضع الليلي">🌙 ليلي</button>
+    <span id="userChip" class="user-chip no-print" style="display:none"></span>
+    <button id="libBtn" class="icon-btn" onclick="LiqaaS.openLib()" style="display:none" title="جلساتي المحفوظة">🗂️ جلساتي</button>
+    <button id="loginBtn" class="icon-btn" onclick="LiqaaS.openAuth()" title="تسجيل الدخول">🔑 دخول</button>
+    <button id="logoutBtn" class="icon-btn" onclick="LiqaaS.signOut()" style="display:none" title="تسجيل الخروج">🚪 خروج</button>
   </div>
 </header>
 
@@ -48,6 +202,7 @@
       <span class="badge">💾 حفظ تلقائي</span>
       <span class="badge">🖨️ طباعة + واتساب</span>
       <span class="badge">🖼️ حفظ صورة و PDF</span>
+      <span class="badge">☁️ حفظ سحابي بحساب مستخدم</span>
     </div>
     <div class="steps">
       <div class="step"><b>١.</b> عبّئ بيانات اللقاء والحضور</div>
@@ -218,33 +373,84 @@
       <button class="btn btn-line" onclick="savePDF()">📄 حفظ PDF</button>
     </div>
     <textarea id="summaryText" placeholder="سيظهر ملخص المحضر هنا…"></textarea>
-    <div class="hint">يُحفظ كل شيء تلقائياً في جهازك 💾 — لو أغلقت الصفحة ستجد بياناتك عند العودة.</div>
+    <div class="hint">يُحفظ كل شيء تلقائياً في جهازك 💾 — <span id="cloudState"></span></div>
   </section>
 
-  <footer>
-    <div class="foot-links no-print">
-      <a href="index.html">🏠 الرئيسية</a>
-      <a href="about.html">؟ من نحن</a>
-      <a href="about.html#faq">❓ الأسئلة الشائعة</a>
-    </div>
-    صُنع بحب لتنظيم لقاءات العائلة 🤍 — «لقاء» يعمل دون إنترنت بعد أول تحميل.
-  </footer>
+  <footer>صُنع بحب لتنظيم لقاءات العائلة 🤍 — «لقاء» يعمل دون إنترنت بعد أول تحميل.</footer>
 </div>
 
 <div id="printArea"></div>
 <div id="toast"></div>
 
-<script src="pwa.js"></script>
-<script>
-// ملاحظة: دوال الوضع الليلي والخط والتنبيهات (toggleTheme / changeFont / resetFont / toast)
-// أصبحت مشتركة بين الصفحات داخل ملف pwa.js
+<!-- نافذة تسجيل الدخول -->
+<div class="modal-overlay" id="authModal" onclick="if(event.target===this)LiqaaS.closeAuth()">
+  <div class="modal-card">
+    <button class="modal-x" onclick="LiqaaS.closeAuth()">✕</button>
+    <h2 style="margin:0 0 2px">🔐 حسابي في «لقاء»</h2>
+    <p class="sub" style="margin-bottom:12px">سجّل الدخول لحفظ جلساتك في قاعدة بيانات آمنة والوصول إليها من أي جهاز.</p>
+    <div class="seg" style="margin-bottom:14px">
+      <button id="tabIn" class="on" onclick="LiqaaS.setTab('in')">🔑 دخول</button>
+      <button id="tabUp" onclick="LiqaaS.setTab('up')">✨ حساب جديد</button>
+    </div>
+    <label class="lbl" for="authEmail">البريد الإلكتروني</label>
+    <input type="email" id="authEmail" placeholder="you@example.com" autocomplete="email">
+    <label class="lbl" for="authPw"><span id="pwLbl">كلمة المرور</span></label>
+    <input type="password" id="authPw" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')LiqaaS.submitAuth()">
+    <button class="btn btn-primary" id="authSubmit" style="width:100%;margin-top:14px" onclick="LiqaaS.submitAuth()">🔑 دخول</button>
+    <div class="auth-msg" id="authMsg"></div>
+  </div>
+</div>
 
+<!-- نافذة جلساتي -->
+<div class="modal-overlay" id="libModal" onclick="if(event.target===this)LiqaaS.closeLib()">
+  <div class="modal-card" style="max-width:560px">
+    <button class="modal-x" onclick="LiqaaS.closeLib()">✕</button>
+    <h2 style="margin:0 0 2px">🗂️ جلساتي المحفوظة</h2>
+    <p class="sub" style="margin-bottom:12px">جلساتك الخاصة بحسابك فقط — لا يراها أحد غيرك.</p>
+    <div class="btn-row" style="margin-top:0;margin-bottom:12px">
+      <button class="btn btn-ghost btn-sm" onclick="LiqaaS.newMeeting()">🆕 جلسة جديدة (تفريغ)</button>
+      <button class="btn btn-line btn-sm" onclick="LiqaaS.saveAsCopy()">💾 حفظ الحالية كنسخة</button>
+      <button class="btn btn-ghost btn-sm" onclick="LiqaaS.refreshLib()">↻ تحديث</button>
+    </div>
+    <div id="libList"></div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script src="supabase-app.js"></script>
+<script>
 // ---------- State ----------
 let attendees = [];
 let rows = [];
 let uid = 0;
 const KEY = 'liqaa_data_v1';
 const CIRC = 2 * Math.PI * 96;
+
+// ---------- Theme & font ----------
+function toggleTheme(){
+  const h = document.documentElement;
+  const dark = h.getAttribute('data-theme') !== 'dark';
+  h.setAttribute('data-theme', dark ? 'dark' : 'light');
+  document.getElementById('themeBtn').textContent = dark ? '☀️ نهاري' : '🌙 ليلي';
+  localStorage.setItem('liqaa_theme', dark ? 'dark' : 'light');
+}
+function changeFont(d){
+  const r = getComputedStyle(document.documentElement).getPropertyValue('--fs');
+  let cur = parseFloat(r) || 16;
+  cur = Math.min(22, Math.max(13, cur + d));
+  document.documentElement.style.setProperty('--fs', cur + 'px');
+  localStorage.setItem('liqaa_fs', cur);
+}
+function resetFont(){ document.documentElement.style.setProperty('--fs','16px'); localStorage.setItem('liqaa_fs',16); }
+
+// ---------- Toast ----------
+let toastT;
+function toast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastT); toastT = setTimeout(()=>t.classList.remove('show'), 2200);
+}
 
 // ---------- Attendees ----------
 function addAttendee(){
@@ -573,9 +779,14 @@ function autoSave(){
     nextTitle:val('nextTitle'), nextDate:val('nextDate'),
     attendees, rows
   }));
+  if(window.LiqaaS) LiqaaS.saveRemote();   // مزامنة سحابية (تُتجاهل في وضع الضيف)
 }
 function load(){
-  // الوضع والخط المحفوظان يُطبّقان تلقائياً من pwa.js
+  // theme & font
+  const th = localStorage.getItem('liqaa_theme');
+  if(th==='dark'){ document.documentElement.setAttribute('data-theme','dark'); document.getElementById('themeBtn').textContent='☀️ نهاري'; }
+  const fs = parseFloat(localStorage.getItem('liqaa_fs'));
+  if(fs) document.documentElement.style.setProperty('--fs', fs+'px');
   try{
     const d = JSON.parse(localStorage.getItem(KEY)||'null');
     if(!d) return;
@@ -586,6 +797,7 @@ function load(){
     uid = rows.reduce((m,r)=>Math.max(m,r.id||0),0);
   }catch(e){}
   renderChips(); renderRows(); paintTimer(); genSummary();
+  if(window.LiqaaS) LiqaaS.boot();          // تهيئة Supabase (مصادقة + مزامنة)
 }
 function clearAll(){
   if(!confirm('مسح كل بيانات اللقاء؟')) return;
